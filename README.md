@@ -1,6 +1,4 @@
 # counties_own_source_revenue_forecasting_model
-<<<<<<< HEAD
-\# County Own-Source Revenue Forecasting Model  
 
 \### A Data-Driven Framework for Subnational Fiscal Planning
 
