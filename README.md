@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 \# County Own-Source Revenue Forecasting Model  
 
 \### A Data-Driven Framework for Subnational Fiscal Planning
@@ -332,3 +333,6 @@ python model\_selection.py
 
 streamlit run app.py
 
+=======
+# counties_own_source_revenue_forecasting_model
+>>>>>>> bbdecce7781739ae7a53d96b1248b4accb2f34cb
