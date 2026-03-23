@@ -1,338 +1,146 @@
-<<<<<<< HEAD
-\# County Own-Source Revenue Forecasting Model  
+# County Revenue Forecasting System  
+### A Machine Learning Approach to Subnational Fiscal Planning  
 
-\### A Data-Driven Framework for Subnational Fiscal Planning
+A county-level forecasting system that adapts to structural differences in revenue performance, moving beyond traditional elasticity-based models.
 
+---
 
+## Motivation
 
-\---
+County revenue forecasting is typically anchored on a simple assumption: that economic activity (GCP) translates predictably into Own-Source Revenue (OSR).
 
+In practice, this assumption does not hold.
 
-
-\## 1. Motivation
-
-
-
-County revenue forecasting has traditionally assumed a stable relationship between economic activity (GCP) and Own-Source Revenue (OSR).  
-
-
-
-This assumption is weak.
-
-
-
-Across counties, revenue performance reflects:
-
-\- administrative capacity  
-
-\- compliance structures  
-
-\- sector composition  
-
-\- enforcement intensity  
-
-
+Across counties, revenue performance is shaped by:
+- administrative capacity  
+- compliance and enforcement systems  
+- sectoral structure  
+- institutional effectiveness  
 
 —not just economic growth.
 
+This project develops a **data-driven forecasting framework** that reflects these realities.
 
+---
 
-This work addresses that gap by building a \*\*county-specific, data-driven forecasting system\*\*.
+## Approach
 
+The model combines three layers of analysis:
 
-
-\---
-
-
-
-\## 2. Analytical Approach
-
-
-
-The framework combines:
-
-\- \*\*Machine learning (unsupervised clustering)\*\* → to identify structural similarities across counties  
-
-\- \*\*Econometric modelling\*\* → to estimate and compare alternative revenue models  
-
-\- \*\*Model selection logic\*\* → to assign the best-performing model per county  
-
-
+- **Machine learning (clustering)** to group counties by structural similarity  
+- **Econometric modelling** to estimate alternative revenue relationships  
+- **Model selection** to assign the best-performing specification per county  
 
 Three competing models are evaluated:
 
+- **Trend-only model** — captures administrative and structural momentum  
+- **Trend + elasticity model** — links revenue to economic activity  
+- **Trend + growth-adjusted model** — captures short-run co-movement without imposing unstable long-run relationships  
 
+Models are selected based on:
+- forecast accuracy (MAPE)  
+- economic plausibility  
+- parameter stability  
 
-1\. \*\*Trend-only model\*\*  
+---
 
-&#x20;  → captures administrative and structural momentum  
+## Key Findings
 
+### 1. Counties are structurally different
 
+![Cluster Profiles](county_cluster_profiles.png)
 
-2\. \*\*Trend + elasticity model\*\*  
+Counties cluster into three distinct groups:
 
-&#x20;  → links OSR to economic activity (GCP)  
+- **Cluster 1**: Moderate capacity, relatively stable systems  
+- **Cluster 2**: High extraction, high dispersion  
+- **Cluster 3**: Low but stable systems  
 
+**Implication:**  
+A single forecasting model cannot be applied uniformly.
 
+---
 
-3\. \*\*Trend + growth-adjusted model\*\*  
+### 2. Economic growth does not consistently drive revenue
 
-&#x20;  → captures short-run co-movement without imposing unstable long-run elasticity  
+![Co-movement](county_gcp_vs_osr_dashboard.png)
 
+- OSR and GCP often move independently  
+- Timing and direction frequently diverge  
 
+**Implication:**  
+Growth alone is not a reliable predictor of revenue performance.
 
-Model choice is based on:
+---
 
-\- forecast accuracy (MAPE)  
+### 3. Revenue is often decoupled from economic activity
 
-\- economic plausibility  
+![Linkage vs Extraction](county_linkage_vs_extraction.png)
 
-\- stability of parameters  
+- Some counties extract high revenue with weak economic linkage  
+- Others show strong growth with limited revenue response  
 
+**Interpretation:**  
+Revenue outcomes are frequently **policy- and administration-driven**, rather than purely economic.
 
+---
 
-\---
+### 4. Effective rates are uneven and unstable
 
+![Effective Rate](effective_rate_diagnostics.png)
 
+- Significant variation across counties  
+- High-performing counties tend to be more volatile  
 
-\## 3. Structural Heterogeneity (Machine Learning Insight)
+**Implication:**  
+Revenue gains may be driven by unstable or unsustainable mechanisms.
 
+---
 
+### 5. Elasticities are unstable
 
-!\[Cluster Profiles](county\_cluster\_profiles.png)
+![Elasticity Diagnostics](point_elasticity_diagnostics.png)
 
+- Elasticities vary widely across time and counties  
+- Negative and inconsistent estimates are common  
 
+**Implication:**  
+Traditional elasticity-based forecasting is unreliable in this context.
 
-Counties are grouped into \*\*three structural clusters\*\*.
+---
 
+## Model Outcome
 
+Instead of imposing a uniform structure, the system adapts to each county.
 
-Key patterns:
+| Model Type | Typical Use |
+|------------|-------------|
+| Trend-only | Dominant (structural/admin driven) |
+| Elasticity-based | Limited cases |
+| Growth-adjusted | Select, dynamic cases |
 
-\- \*\*Cluster 1\*\*: Moderate capacity, relatively stable systems  
+---
 
-\- \*\*Cluster 2\*\*: High extraction, high dispersion (aggressive but volatile)  
+## Policy Implications
 
-\- \*\*Cluster 3\*\*: Low but stable revenue systems  
+- **Revenue is not automatic** — it must be actively managed  
+- **Administrative systems matter as much as economic base**  
+- **Uniform revenue targets are misleading**  
+- **Flexible, data-driven forecasting frameworks are essential**  
 
+---
 
+## Deployment
 
-\*\*Implication:\*\*  
+The system is fully operational and deployable.
 
-Counties do not behave uniformly. A single forecasting model is inappropriate.
+**Core components:**
+- `model_selection.py` → selects best model per county  
+- `model.py` → generates forecasts  
+- `app.py` → interactive dashboard  
 
-
-
-\---
-
-
-
-\## 4. Weak Economic Linkages
-
-
-
-!\[Co-movement](county\_gcp\_vs\_osr\_dashboard.png)
-
-
-
-Across counties:
-
-\- OSR and GCP often move independently  
-
-\- Timing and direction frequently diverge  
-
-
-
-\*\*Implication:\*\*  
-
-Economic growth alone is not a reliable predictor of revenue.
-
-
-
-\---
-
-
-
-\## 5. Decoupling: Linkage vs Extraction
-
-
-
-!\[Linkage vs Extraction](county\_linkage\_vs\_extraction.png)
-
-
-
-This is the central diagnostic.
-
-
-
-Findings:
-
-\- Some counties exhibit \*\*high revenue extraction with weak or negative economic linkage\*\*
-
-\- Others show \*\*strong economic growth but limited revenue response\*\*
-
-
-
-\*\*Interpretation:\*\*
-
-\- Revenue performance is often \*\*policy-driven, not growth-driven\*\*
-
-\- Administrative systems can override economic fundamentals
-
-
-
-\---
-
-
-
-\## 6. Effective Tax Rate Behaviour
-
-
-
-!\[Effective Rate](effective\_rate\_diagnostics.png)
-
-
-
-\- Large differences in effective tax rates across clusters  
-
-\- High-revenue counties are also the most volatile  
-
-
-
-\*\*Implication:\*\*
-
-\- Revenue gains may be \*\*unsustainable if driven by unstable extraction mechanisms\*\*
-
-
-
-\---
-
-
-
-\## 7. Instability of Elasticities
-
-
-
-!\[Elasticity Diagnostics](point\_elasticity\_diagnostics.png)
-
-
-
-Elasticity estimates show:
-
-\- extreme volatility  
-
-\- negative values in some periods  
-
-\- lack of consistency across counties  
-
-
-
-\*\*Implication:\*\*
-
-\- Traditional elasticity-based forecasting is unreliable  
-
-\- Imposing a fixed elasticity risks large forecast errors  
-
-
-
-\---
-
-
-
-\## 8. What the Model Does Differently
-
-
-
-Instead of forcing one structure, the model:
-
-
-
-\- \*\*adapts to county reality\*\*
-
-\- selects the best model per county
-
-\- prioritizes forecast performance over theoretical convenience  
-
-
-
-Outcome:
-
-
-
-| Model Type | Counties |
-
-|------------|---------|
-
-| Trend-only | Majority |
-
-| Elasticity-based | Limited |
-
-| Growth-adjusted | Select cases |
-
-
-
-\---
-
-
-
-\## 9. Policy Implications
-
-
-
-1\. \*\*Revenue is not a passive outcome of growth\*\*  
-
-&#x20;  → It must be actively managed  
-
-
-
-2\. \*\*Administrative capacity matters as much as economic base\*\*  
-
-&#x20;  → Investment in systems and enforcement is critical  
-
-
-
-3\. \*\*Uniform targets are misleading\*\*  
-
-&#x20;  → County-specific strategies are required  
-
-
-
-4\. \*\*Over-reliance on elasticity models is risky\*\*  
-
-&#x20;  → Forecasting frameworks must allow structural flexibility  
-
-
-
-\---
-
-
-
-\## 10. Operational Use
-
-
-
-This model is already deployable:
-
-
-
-\- Automated model selection (`model\_selection.py`)  
-
-\- Forecast engine (`model.py`)  
-
-\- Interactive dashboard (`app.py`)  
-
-
-
-Workflow:
-
-
+**Run locally:**
 
 ```bash
-
-python model\_selection.py
-
+python model_selection.py
 streamlit run app.py
-
-=======
-# counties_own_source_revenue_forecasting_model
->>>>>>> bbdecce7781739ae7a53d96b1248b4accb2f34cb
