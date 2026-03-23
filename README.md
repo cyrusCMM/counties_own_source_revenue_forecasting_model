@@ -1,6 +1,10 @@
 # County Revenue Forecasting System  
 ### A Machine Learning Approach to Subnational Fiscal Planning  
 
+**Live App:** https://countiesownsourcerevenueforecastingmodel-xh7ysudk9ci45ktdnzcyb.streamlit.app/
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://countiesownsourcerevenueforecastingmodel-xh7ysudk9ci45ktdnzcyb.streamlit.app/)
+
 A county-level forecasting system that adapts to structural differences in revenue performance, moving beyond traditional elasticity-based models.
 
 ---
